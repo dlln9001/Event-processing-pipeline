@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/jackc/pgx/v5/stdlib"
@@ -13,9 +14,14 @@ import (
 
 func Run() {
 	fmt.Println("api.Run() running")
+
 	godotenv.Load()
-	// password := os.Getenv("DB_PASSWORD")
-	db, err := sql.Open("pgx", "postgres://postgres:mypassword@localhost:5432/event_processing_db")
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+	db, err := sql.Open("pgx", fmt.Sprintf("postgres://%s:%s@%s:%s/%s", dbUser, dbPassword, dbHost, dbPort, dbName))
 
 	if err != nil {
 		log.Fatal(err)
