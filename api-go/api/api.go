@@ -15,7 +15,7 @@ import (
 func Run() {
 	fmt.Println("api.Run() running")
 
-	godotenv.Load()
+	godotenv.Load("../.env")
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbHost := os.Getenv("DB_HOST")
