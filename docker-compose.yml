@@ -10,6 +10,12 @@ services:
        - "5432:5432"
     volumes:
       - event_processing_db_data:/var/lib/postgresql
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"     # give it one full CPU core
+          memory: 1G      # give it 1GB of RAM
+
 
 
 volumes:
