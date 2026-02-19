@@ -47,18 +47,18 @@ func Run() {
 			panic(err)
 		}
 
-		ctx.JSON(http.StatusOK, "added to db")
+		ctx.JSON(http.StatusCreated, "added to db")
 	})
 
 	r.POST("/transaction", func(ctx *gin.Context) {
 		var req models.Transaction
 		err := ctx.ShouldBindJSON(&req)
-		
+
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		
+
 		// 2. Prepare the SQL Statement
 		// We use $1, $2, etc., for PostgreSQL (parameterized queries) to prevent SQL injection.
 		query := `

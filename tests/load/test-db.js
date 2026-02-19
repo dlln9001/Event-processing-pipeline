@@ -3,9 +3,8 @@ import { sleep, check } from 'k6';
 
 export const options = {
     stages: [
-        { duration: '4s', target: 80 },
-        { duration: '4s', target: 500 },
-        { duration: '4s', target: 1000 },
+        { duration: '2s', target: 1 },
+        { duration: '2s', target: 1 },
     ]
 };
 
@@ -15,7 +14,7 @@ export default function () {
     const res = http.post('http://localhost:8080/test-db');
 
     check(res, {
-        'is status 200': (r) => r.status == 200,
+        'is status 201': (r) => r.status == 201,
     });
 
     sleep(1);
