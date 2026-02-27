@@ -1,15 +1,14 @@
 package api
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"context"
-	"encoding/json"
 
 	"github.com/gin-gonic/gin"
 	"github.com/segmentio/kafka-go"
-
 
 	"event_processing_pipeline/models"
 )
@@ -19,12 +18,11 @@ func Run() {
 
 	w := &kafka.Writer{
 		Addr:     kafka.TCP("localhost:9092", "localhost:9093", "localhost:9094"),
-		Topic:   "topic-A",
+		Topic:    "topic-A",
 		Balancer: &kafka.LeastBytes{},
 	}
 
 	defer w.Close()
-
 
 	r := gin.Default()
 
