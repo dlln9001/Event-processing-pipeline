@@ -11,26 +11,33 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Transaction {
 
+    // number id, database will automatically increment and handle these
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // the type of transaction (like if its a purchase or refund etc.)
     @NotBlank
     @Column(nullable = false)
     private String type;
 
+    // the accountid of the user of that transaction
     @NotNull
     @Column(nullable = false)
     private Integer accountId;
 
+    // merchantid that the user made the transaction with. May be null for non purchase transaction types. 
     private Integer merchantId;
 
+    // id that references a previous transaction for refunds, for example if theres a refund you want to reference which transaction you are refunding
     private Integer referenceEventId;
 
+    // transaction amout in cents so there's no rounding errors
     @NotNull
     @Column(nullable = false)
     private Integer amountCents;
 
+    // type of currency used, will be three characters, ex. USD or JPY
     @NotBlank
     @Column(nullable = false)
     private String currency;
