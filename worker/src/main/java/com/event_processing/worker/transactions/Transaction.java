@@ -5,10 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "transactions")
 public class Transaction {
 
     // number id, database will automatically increment and handle these
@@ -26,10 +28,12 @@ public class Transaction {
     @Column(nullable = false)
     private Integer accountId;
 
-    // merchantid that the user made the transaction with. May be null for non purchase transaction types. 
+    // merchantid that the user made the transaction with. May be null for non
+    // purchase transaction types.
     private Integer merchantId;
 
-    // id that references a previous transaction for refunds, for example if theres a refund you want to reference which transaction you are refunding
+    // id that references a previous transaction for refunds, for example if theres
+    // a refund you want to reference which transaction you are refunding
     private Integer referenceEventId;
 
     // transaction amout in cents so there's no rounding errors
@@ -41,7 +45,6 @@ public class Transaction {
     @NotBlank
     @Column(nullable = false)
     private String currency;
-
 
     // default contructor
     public Transaction() {
@@ -64,7 +67,8 @@ public class Transaction {
         this.currency = currency;
     }
 
-    public Transaction(String type, Integer accountId, Integer merchantId, Integer referenceEventId, Integer amountCents, String currency) {
+    public Transaction(String type, Integer accountId, Integer merchantId, Integer referenceEventId,
+            Integer amountCents, String currency) {
         this.type = type;
         this.accountId = accountId;
         this.merchantId = merchantId;
@@ -74,7 +78,7 @@ public class Transaction {
     }
 
     // getters
-    public Long id() {
+    public Long getId() {
         return this.id;
     }
 
@@ -106,7 +110,7 @@ public class Transaction {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public void setType(String type) {
         this.type = type;
     }
@@ -118,7 +122,7 @@ public class Transaction {
     public void setMerchantId(Integer merchantId) {
         this.merchantId = merchantId;
     }
-    
+
     public void setReferenceEventId(Integer referenceEventId) {
         this.referenceEventId = referenceEventId;
     }
