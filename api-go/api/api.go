@@ -20,6 +20,7 @@ func Run() {
 		Addr:     kafka.TCP("localhost:9092", "localhost:9093", "localhost:9094"),
 		Topic:    "topic-A",
 		Balancer: &kafka.LeastBytes{},
+		Async:        true,
 	}
 
 	defer w.Close()
