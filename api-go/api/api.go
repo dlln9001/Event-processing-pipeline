@@ -64,7 +64,7 @@ func Run() {
 		query := `
 			INSERT INTO transactions (type, account_id, merchant_id, reference_event_id, amount_cents, currency)
 			VALUES ($1, $2, $3, $4, $5, $6)
-			RETURNING id, timestamp;`
+			RETURNING id, created_at;`
 
 		// 3. Execute the query
 		var newID int
