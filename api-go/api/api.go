@@ -64,7 +64,7 @@ func Run() {
 		query := `
 			INSERT INTO transactions (type, account_id, merchant_id, reference_event_id, amount_cents, currency)
 			VALUES ($1, $2, $3, $4, $5, $6)
-			RETURNING event_id, timestamp;`
+			RETURNING id, timestamp;`
 
 		// 3. Execute the query
 		var newID int
@@ -97,5 +97,5 @@ func Run() {
 
 	})
 
-	r.Run()
+	r.Run(":8081")
 }
