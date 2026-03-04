@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/segmentio/kafka-go"
@@ -20,7 +21,9 @@ func Run() {
 		Addr:     kafka.TCP("localhost:9092", "localhost:9093", "localhost:9094"),
 		Topic:    "topic-A",
 		Balancer: &kafka.LeastBytes{},
-		Async:        true,
+		Async:        false,
+		BatchTimeout: 8 * time.Millisecond,
+		WriteTimeout: 5 * time.Second,
 	}
 
 	defer w.Close()
