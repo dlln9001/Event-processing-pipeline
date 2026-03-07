@@ -1,5 +1,9 @@
 
 services:
+  go-api:
+    build: ./api-go
+    ports:
+      - "8081:8081"
   db:
     image: postgres:18
     environment:
