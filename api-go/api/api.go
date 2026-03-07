@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/segmentio/kafka-go"
@@ -17,8 +18,10 @@ import (
 func Run() {
 	fmt.Println("api.Run() running")
 
+	kafkaHost := os.Getenv("KAFKA_HOST")
+
 	w := &kafka.Writer{
-		Addr:         kafka.TCP("localhost:9092"),
+		Addr:         kafka.TCP(fmt.Sprintf("%s:9092", kafkaHost)),
 		Topic:        "topic-A",
 		Balancer:     &kafka.LeastBytes{},
 		Async:        false,
