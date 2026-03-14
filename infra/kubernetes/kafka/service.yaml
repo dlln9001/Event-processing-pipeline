@@ -1,0 +1,26 @@
+# 1. Headless service for stable DNS
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-svc
+spec:
+  clusterIP: None # This makes it headless
+  selector:
+    app: kafka
+  ports:
+    - protocol: TCP
+      port: 9092
+      targetPort: 9092
+---
+# 2. Client service for API/Worker to use
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+spec:
+  selector:
+    app: kafka
+  ports:
+    - protocol: TCP
+      port: 9092
+      targetPort: 9092
