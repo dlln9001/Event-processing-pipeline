@@ -20,10 +20,10 @@ spec:
         resources:
           requests:
             memory: "128Mi"
-            cpu: "100m"      # 10% of 1 CPU core
+            cpu: "100m"      # % of 1 CPU core
           limits:
-            memory: "256Mi"  # 256MB RAM Max
-            cpu: "250m"      # 25% of 1 CPU core
+            memory: "512Mi"  # max ram
+            cpu: "250m"      
         env:
         - name: POSTGRES_USER
           valueFrom:
