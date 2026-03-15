@@ -10,4 +10,4 @@ spec:
     - protocol: TCP
       port: 8080        # Port other pods use
       targetPort: 8080  # Port the container listens on
-      NodePort: 30080
+      nodePort: 30080

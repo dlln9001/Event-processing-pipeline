@@ -4,6 +4,6 @@ metadata:
   name: shared-config
 data:
   KAFKA_HOST: "kafka"
-  DB_HOST: "db-service"
+  DB_HOST: "db"
   DB_PORT: "5432"
   DB_NAME: "event_processing_db"
