@@ -9,5 +9,5 @@ spec:
     - protocol: TCP
       port: 8081      # Port inside the cluster
       targetPort: 8081 # Port the app listens on
-      nodePort: 30081  # Port you can access on localhost:30081
+      nodePort: 30081  # Port you can access on localhost:PORT
   type: NodePort
