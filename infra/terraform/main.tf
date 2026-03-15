@@ -4,7 +4,17 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
+
   }
+
+  backend "s3" {
+    bucket       = "event-processing-pipeline"
+    key          = "terraform/terraform.tfstate"
+    region       = "us-east-1"
+    use_lockfile = true
+    profile      = "terraform-local"
+  }
+
 }
 
 provider "aws" {
