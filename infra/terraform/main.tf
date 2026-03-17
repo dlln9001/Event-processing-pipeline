@@ -36,7 +36,7 @@ data "aws_ami" "latest_amazon_linux" {
 # Create the EC2 Instance
 resource "aws_instance" "my_first_server" {
   ami           = data.aws_ami.latest_amazon_linux.id
-  instance_type = "t3.small"
+  instance_type = "c7i-flex.large"
 
   tags = {
     Name = "MyTerraformInstance"
