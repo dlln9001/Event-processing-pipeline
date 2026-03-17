@@ -2,7 +2,7 @@ This is a distributed, 4-stage event processing pipeline designed to ingest, buf
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-🏗 The Architecture
+# 🏗 The Architecture
 The system is decoupled into five distinct stages and parts.
 
 Ingest API (Go): A high-concurrency "doorway" that accepts JSON payloads and immediately hands them off to the message broker.
@@ -18,7 +18,7 @@ The Platform (AWS/Terraform/K8s): Automated infrastructure-as-code deployment.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-🛠 Tech Stack
+# 🛠 Tech Stack
 Languages: Go (Ingestion), Java (Processing) 
 
 Frameworks: Gin, Springboot
@@ -32,8 +32,44 @@ Infrastructure: AWS, Terraform, Docker, Kubernetes
 CI/CD: GitHub Actions
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+# 🔌  API Documentation
 
- Getting Started (local)
+### Health Check
+GET /ping
+
+Description: Checks if the API service is alive.
+
+Response: 200 OK -> "hello"
+
+
+### Submit Transaction
+
+POST /transaction
+
+Description: Accepts a transaction event and streams it to the Kafka buffer.
+
+Below is the transaction event that would be received and saved:
+| Parameter            | Type      | Description                                               |
+| :------------------- | :-------- | :-------------------------------------------------------- |
+| `type`               | `string`  | **Required**. Event type (e.g., "purchase", "refund")     |
+| `account_id`         | `integer` | **Required**. Unique ID of the user account               |
+| `merchant_id`        | `integer` | Optional. ID of the merchant                              |
+| `reference_event_id` | `integer` | Optional. ID of a linked previous event                   |
+| `amount_cents`       | `integer` | **Required**. Transaction value in cents                  |
+| `currency`           | `string`  | **Required**. ISO code (Must be exactly 3 chars, e.g. USD) |
+
+Sample Payload:
+{
+  "type": "purchase",
+  "account_id": 101,
+  "merchant_id": 5005,
+  "amount_cents": 4500,
+  "currency": "USD"
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ # Getting Started (local)
  
  clone repo
  ```
