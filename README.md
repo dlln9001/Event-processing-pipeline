@@ -34,6 +34,8 @@ CI/CD: GitHub Actions
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 # 🔌  API Documentation
 
+Your entrypoint will be the go api, you will be making requests to that service.
+
 ### Health Check
 GET /ping
 
