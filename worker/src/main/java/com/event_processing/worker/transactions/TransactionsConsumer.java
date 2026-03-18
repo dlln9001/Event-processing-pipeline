@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import tools.jackson.databind.ObjectMapper;
 
-
 // listens to kafka, getting transaction events to be eventually stored in db
 @Component
 public class TransactionsConsumer {
@@ -20,15 +19,11 @@ public class TransactionsConsumer {
 
     @KafkaListener(id = "transaction-group", topics = "topic-A")
     public void listen(String message) {
-        try {
-            System.out.println("Received message: " + message);
+        System.out.println("Received message: " + message);
 
-            Transaction transaction = objectMapper.readValue(message, Transaction.class);
+        Transaction transaction = objectMapper.readValue(message, Transaction.class);
 
-            this.service.saveTransaction(transaction);
+        this.service.saveTransaction(transaction);
 
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 }
