@@ -1,4 +1,4 @@
-This is a distributed, 4-stage event processing pipeline designed to ingest, buffer, and process massive volumes of event data (like transaction events) with zero data loss, even during traffic spikes or database outages.
+This is a distributed, 4-stage event processing pipeline designed to ingest, buffer, and process massive volumes of event data (like transaction events) with minimal user latency, ensuring the data will be stored.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -9,9 +9,9 @@ Ingest API (Go): A high-concurrency "doorway" that accepts JSON payloads and imm
 
 The Buffer (Kafka): A distributed queue that acts as a shock absorber, protecting downstream services from being overwhelmed.
 
-The Brain (Java Worker): A heavy-duty processing service that batches records and ensures data integrity.
+The Brain (Java Worker): A heavy-duty processing service that gets data from kafka to store.
 
-The Durable Store (PostgreSQL) – The final source of truth, optimized for bulk inserts and data integrity.
+The Durable Store (PostgreSQL): The final source of truth, optimized for bulk inserts and data integrity.
 
 The Platform (AWS/Terraform/K8s): Automated infrastructure-as-code deployment.
 
